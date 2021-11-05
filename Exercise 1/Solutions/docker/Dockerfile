@@ -45,5 +45,5 @@ ENV cuidname=$cuidname \
     TARGET="/home/$cuidname/fuzzing_xpdf/install/bin/pdftotext @@ /home/cuidname/fuzzing_xpdf/output"
 
 CMD chown -R $cuidname:$cgidname $OUTPUT && \
-    sudo -u $cuidname afl-fuzz -i $INPUT -o $OUTPUT -s 123 -D -- $TARGET
+    sudo -u $cuidname afl-fuzz -i $INPUT -o $OUTPUT -s 123 -- $TARGET
 

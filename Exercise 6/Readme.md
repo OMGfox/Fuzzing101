@@ -67,7 +67,7 @@ You can find more information about AFL++ persistent mode at: https://github.com
 
 ## Do it yourself!
 In order to complete this exercise, you need to:
-1) Find an efficient of modifying GIMP source code to enable AFL persistent mode
+1) Find an efficient way of modifying GIMP source code to enable AFL persistent mode
 2) Create a seed corpus of XCF samples
 3) Optional: Create a fuzzing dictionary for the XCF file format
 4) Fuzz GIMP until you have a few unique crashes. I recommend you to use as many AFL instances as possible (CPU cores)
@@ -118,7 +118,7 @@ Don't worry if you see some error messages in the testing stage.
 Now, we download and uncompress GIMP 2.8.16:
 ```
 cd ..
-wget https://mirror.klaus-uwe.me/gimp/gimp/v2.8/gimp-2.8.16.tar.bz2
+wget https://mirror.klaus-uwe.me/gimp/pub/gimp/v2.8/gimp-2.8.16.tar.bz2
 tar xvf gimp-2.8.16.tar.bz2 && cd gimp-2.8.16/
 ```
   
@@ -166,7 +166,7 @@ ASAN_OPTIONS=detect_leaks=0,abort_on_error=1,symbolize=0 afl-fuzz -i './afl_in' 
 Some notes:
 - `gimp-console-2.8` is a console-only version of GIMP
 - I recommend enabling deterministic mutations (-D)
-- There is also an infinite loop bug in the code, so we need to set a low timeout limit (-t 100)
+- There is also an infinite loop bug in the code, so we need to set a low timeout limit (ex. -t 100). This timeout limit depends on your machine capabilites, so you will need to adjust it for your particular case.
 
   
 After a while, you should have multiple crashes:
@@ -192,7 +192,7 @@ The last step of the exercise is to fix both bugs. Rebuild your target after the
     
    </details> 
 
-Alternatively, you can download a newer version of libexif, and check that both bugs have been fixed.
+Alternatively, you can download a newer version of GIMP, and check that both bugs have been fixed.
   
   
 ### Bonus

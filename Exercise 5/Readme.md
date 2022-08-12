@@ -131,7 +131,7 @@ and you should see something like that
 First of all, we need to get some XML samples. We're gonna use the **SampleInput.xml** provided in this repository:
 ```
 mkdir afl_in && cd afl_in
-wget asdf
+wget https://raw.githubusercontent.com/antonio-morales/Fuzzing101/main/Exercise%205/SampleInput.xml
 cd ..
 ```
   
@@ -140,7 +140,7 @@ cd ..
 Now, you need to create an XML dictionary. Alternatively, you can use the XML dictionary provided with AFL++: 
 ```
 mkdir dictionaries && cd dictionaries
-wget https://github.com/AFLplusplus/AFLplusplus/blob/stable/dictionaries/xml.dict
+wget https://raw.githubusercontent.com/AFLplusplus/AFLplusplus/stable/dictionaries/xml.dict
 cd ..
 ```
 ### Fuzzing time
@@ -149,13 +149,15 @@ In order to catch the bug, is mandatory to enable the `--valid` parameter. I als
 
 For example, I ran the fuzzer with the following command 
 ```
-afl-fuzz -m none -i ./afl_in -o afl_out -s 123 -x xml.dict -D -M master -- ./xmllint --memory --noenc --nocdata --dtdattr --loaddtd --valid --xinclude @@
+afl-fuzz -m none -i ./afl_in -o afl_out -s 123 -x ./dictionaries/xml.dict -D -M master -- ./xmllint --memory --noenc --nocdata --dtdattr --loaddtd --valid --xinclude @@
 ```
 
 You can run another slave instance with:
 ```
 afl-fuzz -m none -i ./afl_in -o afl_out -s 234 -S slave1 -- ./xmllint --memory --noenc --nocdata --dtdattr --loaddtd --valid --xinclude @@
 ```
+  
+**Are you interested in fuzzing command-line arguments?** Take a look to the following [blog post](https://securitylab.github.com/research/fuzzing-challenges-solutions-1/), to the "Fuzzing command-line arguments" section.
 
 After a while, you should have multiple crashes:
   
